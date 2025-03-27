@@ -1,0 +1,45 @@
+.post-detail-container {
+    margin-top: 6rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 800px;
+    padding: 0 1rem;
+}
+
+.nested-container {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+}
+
+.post-detail-container .post-card {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.post-detail-container .post-actions {
+    display: flex;
+    align-items: center;
+}
+
+.post-detail-container .action-button {
+    display: flex;
+    align-items: center;
+    margin-right: 1.5rem;
+}
+
+.post-detail-container .action-icon {
+    margin-right: 0.5rem;
+}
+
+.post-detail-container .post-metadata {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+}
+
+.post-detail-container .author-username {
+    margin-right: 1rem;
+}
