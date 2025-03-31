@@ -43,3 +43,14 @@
 .post-detail-container .author-username {
     margin-right: 1rem;
 }
+
+.post-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
+  transition: opacity 0.2s;
+}
+
+.post-image:hover {
+  opacity: 0.9;
+}

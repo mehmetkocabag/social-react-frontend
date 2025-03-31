@@ -84,8 +84,8 @@ body {
     border-radius: 20px;
     padding: 5px 15px;
     margin-left: 200px;
-    width: 40%;
-    max-width: 400px;
+    width: 100%;
+    max-width: 500px;
 }
 
 .search-input {

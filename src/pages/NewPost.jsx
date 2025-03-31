@@ -8,23 +8,36 @@ const NewPost = () => {
     const [content, setContent] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
+    const [image, setImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!title.trim() || !content.trim()) {
-            alert("Please fill title and content fields");
+        if (!title.trim()) {
+            alert("Please fill title.");
             return;
         }
 
         setIsSubmitting(true);
         try {
             const userId = localStorage.getItem("userId");
-            await axios.post("/api/v1/posts/create", {
-                userId: userId,
-                title: title,
-                content: content
+
+            const formData = new FormData();
+            formData.append("userId", userId);
+            formData.append("title", title);
+            formData.append("content", content);
+
+            if (image) {
+                formData.append("file", image);
+            }
+
+            await axios.post("/api/v1/posts/create", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data"
+                }
             });
+
             navigate("/feed");
         } catch (error) {
             console.error("Error creating post:", error);
@@ -36,6 +49,18 @@ const NewPost = () => {
 
     const handleCancel = () => {
         navigate("/feed");
+    };
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setImage(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
     };
 
     return (
@@ -63,12 +88,37 @@ const NewPost = () => {
                             value={content}
                             onChange={(e) => setContent(e.target.value)}
                             placeholder="Content..."
-                            required
                             className="post-input content-textarea"
                             rows={8}
                         />
+                        <div className="image-upload-container">
+                            <label htmlFor="image-upload" className="image-upload-button">
+                                🔗  Attach Image
+                            </label>
+                            <input
+                                id="image-upload"
+                                type="file"
+                                accept="image/*"
+                                onChange={handleImageChange}
+                                style={{ display: 'none' }}
+                            />
+                        </div>
                     </div>
-
+                    {imagePreview && (
+                        <div className="image-preview-container">
+                            <img src={imagePreview} alt="Preview" className="image-preview" />
+                            <button
+                                type="button"
+                                className="remove-image-button"
+                                onClick={() => {
+                                    setImage(null);
+                                    setImagePreview(null);
+                                }}
+                            >
+                                ✕
+                            </button>
+                        </div>
+                    )}
                     <div className="button-group">
                         <button
                             type="button"

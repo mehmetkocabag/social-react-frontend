@@ -57,7 +57,7 @@ const PostsByPostId = () => {
 
                     {post.picture && (
                         <div className="post-image-container">
-                            <img src={post.picture} alt={post.title} className="post-image" />
+                            <img src={`/api/v1/images/${post.picture}`} alt={post.title} className="post-image" />
                         </div>
                     )}
 

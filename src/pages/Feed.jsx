@@ -44,9 +44,11 @@ const Feed = () => {
         if (!searchQuery.trim()) return;
 
         try {
-            const response = await axios.get(`/api/v1/posts/search?query=${encodeURIComponent(searchQuery)}`
-            );
-            setPosts(response.data);
+            const response = await axios.get(`/api/v1/posts/search?query=${encodeURIComponent(searchQuery)}`);
+            const sortedPosts = [...(response.data || [])].sort((a, b) => {
+                return new Date(b.timeStamp) - new Date(a.timeStamp);
+            });
+            setPosts(sortedPosts);
         } catch (error) {
             console.error('Error searching:', error);
         }
@@ -264,7 +266,7 @@ const Feed = () => {
 
                                 {post.picture && (
                                     <img
-                                        src={post.picture}
+                                        src={`/api/v1/images/${post.picture}`}
                                         alt={post.title}
                                         className="post-image"
                                     />
@@ -273,7 +275,7 @@ const Feed = () => {
                                     {post.content}
                                 </div>
 
-                                {post.content && post.content.length > 200 && (
+                                {post.content && post.content.length > 600 && (
                                     <button
                                         className="read-more-button"
                                         onClick={() => togglePostExpansion(post.id)}

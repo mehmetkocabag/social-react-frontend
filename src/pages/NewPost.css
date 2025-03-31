@@ -84,3 +84,47 @@
     opacity: 0.7;
     cursor: not-allowed;
 }
+.image-upload-container {
+    margin-top: 10px;
+}
+
+.image-upload-button {
+    display: inline-block;
+    padding: 8px 16px;
+    background-color: #333;
+    color: #ddd;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.image-upload-button:hover {
+    background-color: #444;
+    color: white;
+}
+
+.image-preview-container {
+    margin-top: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.image-preview {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+}
+
+.remove-image-button {
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    color: white;
+    border: none;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
